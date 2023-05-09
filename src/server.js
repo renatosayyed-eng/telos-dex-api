@@ -3,13 +3,15 @@ const express = require('express');
 
 // Importing the environment variables
 const { PORT } = require('./config/env');
+// Importing the database configuration
+require('./config/database');
 
 // Creating an express applications
 const app = express();
 
 // Setting up the basic route
 app.get('/', (req, res) => {
-    res.end('Setting up the basic structure of a Node.js API');
+    res.send('Welcome to the Pokedex API');
 });
 
 // Setting up the server
