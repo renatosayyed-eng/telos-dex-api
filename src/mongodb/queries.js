@@ -42,7 +42,7 @@ const listWaterPokemons = async (req, res) => {
 // List all legendary Pokémons, showing only their name, pokédex number and type 1, sorted by pokédex number
 const listLegendaryPokemons = async (req, res) => {
     try {
-        const pokemons = await PokemonModel.find({is_legendary: "1"}, {name: 1, pokedex_number: 1, type1: 1, _id: 0}).sort({pokedex_number: 1});
+        const pokemons = await PokemonModel.find({is_legendary: {$eq : '1'}}, {name: 1, pokedex_number: 1, type1: 1, _id: 0}).sort({pokedex_number: 1});
         return res.status(200).send(pokemons);
     } catch (err) {
         return res.status(400).json({
@@ -107,12 +107,24 @@ const listPokemonsWithTypesFF = async (req, res) => {
 // List all Pokémons except the legendary ones, showing only their name and pokédex number, sorted by pokédex number
 const listPokemonsExceptLegendary = async (req, res) => {
     try {
-        const pokemons = await PokemonModel.find({is_legendary: {$ne: "1"}}, {name: 1, pokedex_number: 1, _id: 0}).sort({pokedex_number: 1});
+        const pokemons = await PokemonModel.find({is_legendary: {$ne: '1'}}, {name: 1, pokedex_number: 1, _id: 0}).sort({pokedex_number: 1});
         return res.status(200).send(pokemons);
     } catch (err) {
         return res.status(400).json({
             error: '@queries/listPokemonsExceptLegendary',
-            message: err.message || 'Failed to list all Pokémons except the legendary ones',
+            message: err.message || 'Failed to list the non-legendary Pokémons',
         });
     }
+};
+
+module.exports = {
+    listPokemons,
+    listPokemonsSortedByAttack,
+    listWaterPokemons,
+    listLegendaryPokemons,
+    listPokemonsWithAttackAndSpeed,
+    listPokemonsWithHpOrDefense,
+    listPokemonsWithTypesPFF,
+    listPokemonsWithTypesFF,
+    listPokemonsExceptLegendary,
 };
