@@ -2,10 +2,10 @@
 const mongoose = require('mongoose');
 
 // Importing the environment variables
-const { CLUSTER_URI, COLLECTION, USER, PASS } = require('./env');
+const { CLUSTER_URI, DATABASE, USER, PASS } = require('./env');
 
 // Creating the connection URI
-const URI = `mongodb+srv://${USER}:${PASS}@${CLUSTER_URI}/${COLLECTION}?retryWrites=true&w=majority`;
+const URI = `mongodb+srv://${USER}:${PASS}@${CLUSTER_URI}/${DATABASE}?retryWrites=true&w=majority`;
 
 // Connecting to the database and checking the connection status
 mongoose.connect(URI, { 

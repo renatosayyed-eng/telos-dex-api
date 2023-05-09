@@ -5,7 +5,7 @@ module.exports = {
     PORT: process.env.PORT,
     JWT_SECRET: process.env.JWT_SECRET,
     CLUSTER_URI: process.env.CLUSTER_URI,
-    COLLECTION: process.env.COLLECTION,
+    DATABASE: process.env.DATABASE,
     USER: process.env.USER,
     PASS: process.env.PASS,
 };
