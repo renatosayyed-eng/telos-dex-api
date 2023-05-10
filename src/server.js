@@ -8,6 +8,7 @@ require('./config/database');
 // Importing the routes
 const challengeRoutes = require('./routes/challenge.routes');
 const pokemonRoutes = require('./routes/pokemon.routes');
+const trainerRoutes = require('./routes/trainer.routes');
 
 // Creating an express applications
 const app = express();
@@ -15,6 +16,7 @@ const app = express();
 app.use(express.json());
 app.use(challengeRoutes);
 app.use(pokemonRoutes);
+app.use(trainerRoutes);
 
 // Setting up the basic route
 app.get('/', (req, res) => {
