@@ -10,7 +10,6 @@ const PokemonSchema = new mongoose.Schema({
     },
     pokedex_number : {
         type: Number,
-        required: true,
         unique: true
     },
     attack : {
