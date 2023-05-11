@@ -1,5 +1,5 @@
 const TrainerModel = require('../model/trainer.model');
-const { getByQuery } = require('./pokemons.controller');
+const PokemonModel = require('../model/pokemon.model');
 
 const getByID = async (req, res) => {
     try {
@@ -7,6 +7,7 @@ const getByID = async (req, res) => {
         if (!trainer) {
             throw new Error();
         }
+        trainer.pokemons_use = undefined;
         return res.status(200).send(trainer);
     } catch (err) {
         return res.status(400).json({
@@ -22,6 +23,7 @@ const getByName = async (req, res) => {
         if (!trainer) {
             throw new Error();
         }
+        trainer.pokemons_use = undefined;
         return res.status(200).send(trainer);
     } catch (err) {
         return res.status(400).json({
@@ -34,9 +36,11 @@ const getByName = async (req, res) => {
 const create = async (req, res) => {
     try {
         const trainer = new TrainerModel(req.body);
-        const pokemons = await getByQuery({ _id: { $in: trainer.pokemons } });
+        const pokemons = await PokemonModel.find({ _id: { $in: trainer.pokemons_use } });
         trainer.pokemons = pokemons;
+        trainer.pokemons_use = undefined;
         await trainer.save();
+        trainer.pokemons_use = undefined;
         return res.status(201).send(trainer);
     } catch (err) {
         return res.status(400).json({
@@ -52,6 +56,7 @@ const updateById = async (req, res) => {
         if (!trainer) {
             throw new Error();
         }
+        trainer.pokemons_use = undefined;
         return res.status(200).send(trainer);
     } catch (err) {
         return res.status(400).json({
@@ -67,6 +72,7 @@ const updateByName = async (req, res) => {
         if (!trainer) {
             throw new Error();
         }
+        trainer.pokemons_use = undefined;
         return res.status(200).send(trainer);
     } catch (err) {
         return res.status(400).json({
@@ -82,6 +88,7 @@ const deleteById = async (req, res) => {
         if (!trainer) {
             throw new Error();
         }
+        trainer.pokemons_use = undefined;
         return res.status(200).send(trainer);
     } catch (err) {
         return res.status(400).json({
@@ -97,6 +104,7 @@ const deleteByName = async (req, res) => {
         if (!trainer) {
             throw new Error();
         }
+        trainer.pokemons_use = undefined;
         return res.status(200).send(trainer);
     } catch (err) {
         return res.status(400).json({

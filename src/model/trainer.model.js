@@ -21,16 +21,20 @@ const TrainerSchema = new mongoose.Schema({
         required: true,
     },
     badges : {
-        type: Array,
+        type: [String],
         required: false,
     },
     speciality : {
         type: String,
         required: true,
     },
+    pokemons_use : {
+        type: [String],
+        required: false,
+    },
     pokemons : {
-        type: Array,
-        required: true,
+        type: [Object],
+        required: false,
     },
 });
 

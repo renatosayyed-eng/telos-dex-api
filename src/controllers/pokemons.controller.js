@@ -17,7 +17,7 @@ const getByQuery = async (req, res) => {
 };
 const create = async (req, res) => {
     try {
-        const pokemon = new PokemonSaveModel(req.body);
+        const pokemon = new PokemonModel(req.body);
         const lastPokemon = await PokemonModel.findOne().sort({pokedex_number: -1});
         pokemon.pokedex_number = lastPokemon.pokedex_number + 1;
         await pokemon.save();
