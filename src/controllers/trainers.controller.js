@@ -1,4 +1,4 @@
-const TrainerModel = require('../models/trainers.model');
+const TrainerModel = require('../model/trainer.model');
 const { getByQuery } = require('./pokemons.controller');
 
 const getByID = async (req, res) => {
